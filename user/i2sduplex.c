@@ -37,7 +37,7 @@ LOCAL void slc_isr(void) {
 	{
 		finishedDesc=(struct sdio_queue*)READ_PERI_REG(SLC_RX_EOF_DES_ADDR);
 
-		erx++;
+		etx++;	//I know it's wacky, but the nomeclature is backwards, this is for TX packets in here.
 	}
 	if ( (slc_intr_status & SLC_TX_EOF_INT_ST))
 	{
@@ -47,7 +47,8 @@ LOCAL void slc_isr(void) {
 		//Don't know why - but this MUST be done, otherwise everything comes to a screeching halt.
 		finishedDesc->owner=1;
 
-		etx++;
+		//Nomaclature weird. this is actually RX packets.
+		erx++;
 	}
 
 
